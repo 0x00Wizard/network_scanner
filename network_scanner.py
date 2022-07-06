@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 import scapy.all as scapy
+import optparse
+
+
+def get_arguments():
+    parser = optparse.OptionParser()
+    parser.add_option("-t", "--target", dest="target", help="example: python3 network_scanner.py --t 10.0.2.1/24")
+    options, args = parser.parse_args()
+    return options
 
 
 def scan(ip):
@@ -13,15 +21,15 @@ def scan(ip):
     for data in answered_list:
         client_dict = {"ip": data[1].psrc, "mac": data[1].hwsrc}
         client_list.append(client_dict)
-        # print(f"{data[1].psrc} \t\t {data[1].hwsrc}")
-        # print("-" * 30)
     return client_list
 
 
 def print_results(results_list):
     print("IP \t\t\tMAC Address \n------------------------------------")
     for client in results_list:
-        print(client)
+        print(f"{client['ip']} \t\t {client['mac']}")
 
 
-scan("192.168.3.1/24")
+option = get_arguments()
+scan_result = scan(option.target)
+print_results(scan_result)
