@@ -16,9 +16,9 @@ def mac_address_lookup(mac):
     }
 
     response = requests.get(url=MAC_ADDRESS_ENDPOINT, params=params)
-    data = response.json()
+    data = response.json()["vendorDetails"]["companyName"]
 
-    print(data["vendorDetails"]["companyName"])
+    return data
 
 
 def get_arguments():
@@ -43,9 +43,9 @@ def scan(ip):
 
 
 def print_results(results_list):
-    print("IP \t\t\tMAC Address \t\t\t CompanyName\n------------------------------------")
+    print("IP \t\t\tMAC Address \t\t CompanyName\n------------------------------------------------------------")
     for client in results_list:
-        print(f"{client['ip']} \t\t {client['mac']} \t\t mac_address_lookup(client['mac'])")
+        print(f"{client['ip']} \t\t {client['mac']} \t\t {mac_address_lookup(client['mac'])}")
 
 
 option = get_arguments()
