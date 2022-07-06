@@ -1,6 +1,24 @@
 #!/usr/bin/env python
 import scapy.all as scapy
 import optparse
+import requests
+
+# import maclookup
+
+MAC_ADDRESS_ENDPOINT = "https://api.macaddress.io/v1?"
+
+
+def mac_address_lookup(mac):
+    params = {
+        "apiKey": "at_fkqRppKrlTqskY1pMN1wBHVuTnMyR",
+        "search": mac,
+        "output": "json"
+    }
+
+    response = requests.get(url=MAC_ADDRESS_ENDPOINT, params=params)
+    data = response.json()
+
+    print(data["vendorDetails"]["companyName"])
 
 
 def get_arguments():
@@ -25,9 +43,9 @@ def scan(ip):
 
 
 def print_results(results_list):
-    print("IP \t\t\tMAC Address \n------------------------------------")
+    print("IP \t\t\tMAC Address \t\t\t CompanyName\n------------------------------------")
     for client in results_list:
-        print(f"{client['ip']} \t\t {client['mac']}")
+        print(f"{client['ip']} \t\t {client['mac']} \t\t mac_address_lookup(client['mac'])")
 
 
 option = get_arguments()
