@@ -11,8 +11,11 @@ def scan(ip):
     client_list = []
 
     for data in answered_list:
+        client_dict = {"ip": data[1].psrc, "mac": data[1].hwsrc}
+        client_list.append(client_dict)
         print(f"{data[1].psrc} \t\t {data[1].hwsrc}")
         print("-" * 30)
+    print(client_list)
 
 
 scan("192.168.3.1/24")
