@@ -3,7 +3,6 @@ import scapy.all as scapy
 import optparse
 import requests
 
-# import maclookup
 
 MAC_ADDRESS_ENDPOINT = "https://api.macaddress.io/v1?"
 
