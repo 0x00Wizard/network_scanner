@@ -42,7 +42,8 @@ def scan(ip):
 
 
 def print_results(results_list):
-    print("IP \t\t\tMAC Address \t\t CompanyName\n------------------------------------------------------------")
+    print("IP \t\t\tMAC Address \t\t\t CompanyName\n")
+    print("-" * 70)
     for client in results_list:
         print(f"{client['ip']} \t\t {client['mac']} \t\t {mac_address_lookup(client['mac'])}")
 
